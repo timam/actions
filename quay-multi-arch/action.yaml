@@ -1,0 +1,41 @@
+name: quay-multi-arch
+description: Build and Push Multi Arch Docker Image to Quay
+
+inputs:
+  quay_username:
+    description: robot username for quay
+    required: true
+  quay_password:
+    description: password of robot user for quay
+    required: true
+  quay_registry:
+    description: registry name of quay
+    required: true
+  service_name:
+    description: name of microservice
+    required: true
+  tag:
+    description: docker image tag
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: build docker image
+      id: build-docker-image
+      uses: redhat-actions/buildah-build@v2
+      with:
+        image: ${{ inputs.service_name }}
+        tags: ${{ github.ref_name }}
+        containerfiles: svc/${{ inputs.service_name }}/Dockerfile
+
+    - name: push docker image to quay.io
+      id: push-docker-image
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ steps.build-docker-image.outputs.image }}
+        tags: ${{ steps.build-docker-image.outputs.tags }}
+        registry: ${{ inputs.quay_registry }}
+        username: ${{ inputs.quay_username }}
+        password: ${{ inputs.quay_password }}
+      
