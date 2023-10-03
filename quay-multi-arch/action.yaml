@@ -36,9 +36,9 @@ runs:
       id: push-docker-image
       uses: redhat-actions/push-to-registry@v2
       with:
+        registry: ${{ inputs.quay_registry }}
         image: ${{ steps.build-docker-image.outputs.image }}
         tags: ${{ steps.build-docker-image.outputs.tags }}
-        registry: ${{ inputs.quay_registry }}
         username: ${{ inputs.quay_username }}
         password: ${{ inputs.quay_password }}
       
