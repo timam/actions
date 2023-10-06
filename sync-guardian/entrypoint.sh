@@ -1,7 +1,6 @@
 #!/bin/sh -l
 
-ls -larth /bin/sync-guardian
-./bin/sync-guardian 1 1
+echo $GITHUB_RUN_ID
 echo "message=$message" >> $GITHUB_OUTPUT
 
 
