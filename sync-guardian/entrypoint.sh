@@ -1,9 +1,7 @@
 #!/bin/sh -l
 
 ls -larth /bin/sync-guardian
-
-echo "We got $1 $2"
-./bin/sync-guardian $1 $2
+./bin/sync-guardian 1 1
 echo "message=$message" >> $GITHUB_OUTPUT
 
 
