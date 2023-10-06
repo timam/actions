@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/sh
 
 ls -larth /
 ./sync-guardian $1 $2
