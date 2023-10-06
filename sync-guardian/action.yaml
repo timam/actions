@@ -1,0 +1,18 @@
+name: 'Hello World'
+description: 'Greet someone and record the time'
+inputs:
+  file_url:
+    description: 'url of the file'
+    required: true
+  file_path:
+    description: 'path of file in repo'
+    required: true
+outputs:
+  message:
+    description: 'message'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.file_url }}
+    - ${{ inputs.file_path }}
