@@ -8,7 +8,7 @@ jobs:
     name: sync
     steps:
       - id: sync
-        uses: timam/sync-guardian@main
+        uses: timam/actions/sync-guardian@main
         with:
           file_url: 'https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml'
           file_path: '/configs/metrics-server.yaml'
