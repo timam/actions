@@ -7,6 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     name: sync
     steps:
+      - name: Get File Path
+        run: |
+          echo "File Path: $GITHUB_WORKSPACE"
+      - name: Run tree command
+        run: tree
       - id: sync
         uses: timam/actions/url-file-syncer@main
         with:
