@@ -6,8 +6,17 @@ import (
 
 func main() {
 	remoteFileUrl := os.Args[1]
-	localFilePath := os.Args[2]
+	//localFilePath := os.Args[2]
 
-	message := "will compare " + remoteFileUrl + localFilePath
-	setOutput("message", message)
+	file, err := downloadFile(remoteFileUrl)
+	if err != nil {
+		message := "error when downloading file " + file
+		setOutput("message", message)
+		return
+	} else {
+		message := "successfully downloaded file " + file
+		setOutput("message", message)
+		return
+	}
+
 }
