@@ -3,7 +3,6 @@ package main
 import (
 	"os"
 	"path/filepath"
-	"strconv"
 )
 
 func main() {
@@ -13,19 +12,28 @@ func main() {
 	remoteFilePath, err := downloadFile(remoteFileUrl)
 
 	if err != nil {
-		message := "error when downloading file " + remoteFilePath
+		message := "error when downloading file " + remoteFilePath + err.Error()
 		setOutput("message", message)
-		return
 	} else {
-		result, err := compareFiles(remoteFilePath, localFilePath)
+		alreadyUpDated, err := compareFiles(remoteFilePath, localFilePath)
 		if err != nil {
-			message := "error when comparing files. result :" + strconv.FormatBool(result) + " error: " + err.Error()
+			message := "error while comparing files - " + err.Error()
 			setOutput("message", message)
-			return
+		}
+
+		if alreadyUpDated == true {
+			message := "files are already in sync, nothing to do"
+			setOutput("message", message)
 		} else {
-			message := "file compare success. result : " + strconv.FormatBool(result)
-			setOutput("message", message)
-			return
+			err := syncLocalFileWithRemote(remoteFilePath, localFilePath)
+			if err != nil {
+				message := "error while syncing local file compared to remote " + err.Error()
+				setOutput("message", message)
+			} else {
+				message := "successfully synced local file with remote"
+				setOutput("message", message)
+			}
+
 		}
 	}
 
