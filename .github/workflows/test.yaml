@@ -28,5 +28,10 @@ jobs:
           commit_user_name: Github Robot
           commit_user_email: gitub-robot@timam.io
           file_pattern: 'configs/metrics-server.yaml'
+          push_options: '--force'
+
+      - name: Create Pull Request
+        if: steps.sync.outputs.message == 'successfully synced local file with remote'
+        uses: peter-evans/create-pull-request@v5
 
           
