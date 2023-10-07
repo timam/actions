@@ -5,13 +5,14 @@ import (
 	"os"
 )
 
-func setOutput(output string) {
+func setOutput(message string) {
 	outputFile := os.Getenv("GITHUB_OUTPUT")
 	if outputFile == "" {
 		fmt.Println("GITHUB_OUTPUT environment variable not set")
 		os.Exit(1)
 	}
 
+	// Open the file for appending
 	file, err := os.OpenFile(outputFile, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		fmt.Println("Error opening file:", err)
@@ -19,7 +20,8 @@ func setOutput(output string) {
 	}
 	defer file.Close()
 
-	_, err = fmt.Fprintf(file, "output=%s\n", output)
+	// Write the message to the file
+	_, err = fmt.Fprintf(file, "message=%s\n", message)
 	if err != nil {
 		fmt.Println("Error writing to file:", err)
 		os.Exit(1)
