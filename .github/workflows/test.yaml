@@ -10,9 +10,9 @@ jobs:
       - name: Get File Path
         run: |
           echo "File Path: $GITHUB_WORKSPACE"
-      - name: Run tree command
+      - name: get working path
         run: |
-          ls -larth
+          pwd && ls
       - id: sync
         uses: timam/actions/url-file-syncer@main
         with:
