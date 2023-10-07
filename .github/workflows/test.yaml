@@ -9,9 +9,7 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4
-      - name: get pwd
-        run: |
-          pwd && ls -larth
+
       - id: sync
         uses: timam/actions/url-file-syncer@main
         with:
@@ -19,3 +17,8 @@ jobs:
           file_path: 'configs/metrics-server.yaml'
       - name: Get the output message
         run: echo "${{ steps.sync.outputs.message }}"
+
+      - name: git status
+        run: |
+          git status
+          
