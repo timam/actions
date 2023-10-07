@@ -31,6 +31,7 @@ func main() {
 				setOutput("message", message)
 			} else {
 				message := "successfully synced local file with remote"
+				deleteFile(remoteFilePath)
 				setOutput("message", message)
 			}
 

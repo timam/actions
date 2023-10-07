@@ -18,21 +18,13 @@ jobs:
       - name: Get the output message
         run: echo "${{ steps.sync.outputs.message }}"
 
-      - name: Commit changes
-        if: steps.sync.outputs.message == 'successfully synced local file with remote'
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: metrics-server got updates
-          create_branch: true
-          branch: robot/metrics-server-update
-          commit_user_name: Github Robot
-          commit_user_email: gitub-robot@timam.io
-          file_pattern: 'configs/metrics-server.yaml'
-          push_options: '--force'
-
       - name: Create Pull Request
         if: steps.sync.outputs.message == 'successfully synced local file with remote'
         uses: peter-evans/create-pull-request@v5
         with:
           title: Metrics Server config file got new changes
+          commit-message: Metrics Server config file got new changes
+          committer: github-robot@timam.io
+          branch: robot/metrics-server-config-sync
+          assignees: timam
 

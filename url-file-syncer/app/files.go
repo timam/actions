@@ -60,3 +60,11 @@ func syncLocalFileWithRemote(downloadedFile, localFile string) error {
 
 	return nil
 }
+
+func deleteFile(filePath string) error {
+	err := os.Remove(filePath)
+	if err != nil {
+		return err
+	}
+	return nil
+}
