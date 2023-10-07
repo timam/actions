@@ -12,7 +12,7 @@ jobs:
           echo "File Path: $GITHUB_WORKSPACE"
       - name: Run tree command
         run: |
-          tree
+          ls -larth
       - id: sync
         uses: timam/actions/url-file-syncer@main
         with:
