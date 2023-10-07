@@ -18,7 +18,13 @@ jobs:
       - name: Get the output message
         run: echo "${{ steps.sync.outputs.message }}"
 
-      - name: git status
-        run: |
-          git status
+      - name: Commit changes
+        if: steps.sync.outputs.message == 'successfully synced local file with remote'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: metrics-server got updates
+          create_branch: true
+          branch: robot/metrics-server-update
+          commit_user_name: Github Robot
+          commit_user_email: gitub-robot@timam.io
           
