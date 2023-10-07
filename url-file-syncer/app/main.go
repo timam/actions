@@ -3,17 +3,24 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 )
 
 func main() {
 	remoteFileUrl := os.Args[1]
 	localFilePath := os.Args[2]
 
-	err := downloadFile(remoteFileUrl)
+	downloadedFileName, err := downloadFile(remoteFileUrl)
 	if err != nil {
 		fmt.Printf("Error while doenloading file %s", err)
 	}
 
-	message := "will compare " + remoteFileUrl + " " + localFilePath
+	files, err := compareFiles(downloadedFileName, localFilePath)
+	if err != nil {
+		return
+	}
+
+	//message := "will compare " + remoteFileUrl + " " + localFilePath
+	message := "result of compare is " + strconv.FormatBool(files)
 	setOutput("message", message)
 }

@@ -7,25 +7,22 @@ import (
 	"path/filepath"
 )
 
-func downloadFile(url string) error {
+func downloadFile(url string) (string, error) {
 	fileName := filepath.Base(url)
-
-	file, err := os.Create(fileName)
+	filePath := filepath.Join(os.Getenv("GITHUB_WORKSPACE"), fileName)
+	file, err := os.Create(filePath)
 	if err != nil {
-		return err
+		return "", err
 	}
 	defer file.Close()
-
 	response, err := http.Get(url)
 	if err != nil {
-		return err
+		return "", err
 	}
 	defer response.Body.Close()
-
 	_, err = io.Copy(file, response.Body)
 	if err != nil {
-		return err
+		return "", err
 	}
-
-	return nil
+	return filePath, nil
 }
