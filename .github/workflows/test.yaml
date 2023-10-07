@@ -11,6 +11,6 @@ jobs:
         uses: timam/actions/url-file-syncer@main
         with:
           file_url: 'https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml'
-          file_path: 'configs/metrics-server.yaml'
+          file_path: '/configs/metrics-server.yaml'
       - name: Get the output message
         run: echo "${{ steps.sync.outputs.message }}"
