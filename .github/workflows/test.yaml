@@ -3,9 +3,9 @@ on:
   push:
 
 jobs:
-  sync-guardian:
+  sync:
     runs-on: ubuntu-latest
-    name: sync
+    name: Metrics Server Config Sync
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4
@@ -33,5 +33,6 @@ jobs:
       - name: Create Pull Request
         if: steps.sync.outputs.message == 'successfully synced local file with remote'
         uses: peter-evans/create-pull-request@v5
+        with:
+          title: Metrics Server config file got new changes
 
-          
