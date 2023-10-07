@@ -13,7 +13,7 @@ func main() {
 	remoteFilePath, err := downloadFile(remoteFileUrl)
 
 	if err != nil {
-		message := "error when downloading file " + file
+		message := "error when downloading file " + remoteFilePath
 		setOutput("message", message)
 		return
 	} else {
