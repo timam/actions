@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func setOutput(message string) {
+func setOutput(output string) {
 	outputFile := os.Getenv("GITHUB_OUTPUT")
 	if outputFile == "" {
 		fmt.Println("GITHUB_OUTPUT environment variable not set")
@@ -21,7 +21,7 @@ func setOutput(message string) {
 	defer file.Close()
 
 	// Write the message to the file
-	_, err = fmt.Fprintf(file, "message=%s\n", message)
+	_, err = fmt.Fprintf(file, "message=%s\n", output)
 	if err != nil {
 		fmt.Println("Error writing to file:", err)
 		os.Exit(1)
