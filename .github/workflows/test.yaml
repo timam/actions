@@ -27,6 +27,6 @@ jobs:
           branch: robot/metrics-server-update
           commit_user_name: Github Robot
           commit_user_email: gitub-robot@timam.io
-          file_pattern: 'metrics-server.yaml'
+          file_pattern: 'configs/metrics-server.yaml'
 
           
