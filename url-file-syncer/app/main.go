@@ -1,12 +1,19 @@
 package main
 
 import (
+	"fmt"
 	"os"
 )
 
 func main() {
-	fileUrl := os.Args[1]
-	filePath := os.Args[2]
-	message := "will compare " + fileUrl + " " + filePath
+	remoteFileUrl := os.Args[1]
+	localFilePath := os.Args[2]
+
+	err := downloadFile(remoteFileUrl)
+	if err != nil {
+		fmt.Printf("Error while doenloading file %s", err)
+	}
+
+	message := "will compare " + remoteFileUrl + " " + localFilePath
 	setOutput("message", message)
 }
